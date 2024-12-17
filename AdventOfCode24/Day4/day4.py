@@ -55,8 +55,39 @@ def filePrep(input):
 #A M
 #S X
 
+
+#part 2
+
+def xMas(input):
+    with open(input, "r") as file:
+        counter = 0
+        templineList = file.readlines()
+        text = []
+        for i in templineList:
+            text.append(i.strip())
+        print(text)
+        
+        for line in range (1,len(text)-1):
+            for charakter in range(1,len(text[line])-1):
+                #print("line: ", line, "column: ", charakter, "Value: ",text[line][charakter])
+                if text[line][charakter] == 'A':
+                    #print("line: ", line, "column: ", charakter, "Value: ",text[line][charakter], "A detected")
+                    if (text[line+1][charakter+1] == 'S' and text[line-1][charakter-1] == 'M'):
+                        if (text[line-1][charakter+1] == 'S' and text[line+1][charakter-1] == 'M') or (text[line-1][charakter+1] == 'M' and text[line+1][charakter-1] == 'S'):
+                            counter += 1
+                        
+                    elif (text[line+1][charakter+1] == 'M' and text[line-1][charakter-1] == 'S'):
+                        if (text[line-1][charakter+1] == 'S' and text[line+1][charakter-1] == 'M') or (text[line-1][charakter+1] == 'M' and text[line+1][charakter-1] == 'S'):
+                            counter += 1
+                    else:
+                        continue
+        
+        return counter
+                 
+                        
+
 file_path = "C:/Users/Tobia/OneDrive/Dokumente/AdventOfCode24/Day4/inputDay4.txt"
 file_path2 = "C:/Users/Tobia/OneDrive/Dokumente/AdventOfCode24/Day4/exampleDay4.txt"
 
-print(filePrep(file_path))
-print(filePrep(file_path2))
+print(xMas(file_path))
+print(xMas(file_path2))
